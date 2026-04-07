@@ -6,32 +6,19 @@ import axios from 'axios'
 
 
 function App() {
-  const [notes, setNotes] = useState ([
-  {
-  title: "test title1",
-  description: "test description",
-  },
-  {
-  title: "test title2",
-  description: "test description",
-  },
-  {
-  title: "test title3",
-  description: "test description",
-  },
-  {
-  title: "test title4",
-  description: "test description",
-  }
-]);
+  const [notes, setNotes] = useState ([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/notes')
-      .then((res) =>{
+
+  function fetchNotes() {
+      axios.get("http://localhost:3000/api/notes")
+      .then(res =>{
         setNotes(res.data.notes);
-      });
-  }, []);
+      })
+  }
 
+   useEffect(() =>{
+       fetchNotes();
+   }, [])
   
 
   return (
